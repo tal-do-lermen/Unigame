@@ -1,0 +1,7 @@
+@keyframes player-animation {
+    from{
+        background-position-x: 0px;
+    }to{
+        background-position-x: -192px;
+    }
+}

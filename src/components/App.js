@@ -7,7 +7,6 @@ function App() {
     <div className="App">
       <div className='App-Header'
         style={{
-          position: 'relative',
           height: MapSize,
           width: MapSize
         }}>

@@ -3,4 +3,8 @@ background-color: #c7d8e2;
 text-align: center;
 display: flex;
 justify-content: center;
+height: "100hv";
+display: grid;
+place-items: 'center';
+
 }

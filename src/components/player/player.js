@@ -1,6 +1,6 @@
 import React from "react";
-import './player.css'
 import { PlayerSize } from "../cfg";
+import './player.css';
 const Player = (props) => {
     
     return (
@@ -11,8 +11,9 @@ const Player = (props) => {
             backgroundRepeat: 'no-repeat',
             animation: 'player-animation 1s infinite steps(6)',
             position: 'absolute',
+            zIndex:1,
             top: props.position.y * 32,
-            left: props.position.x * 32,
+            left: props.position.x *32,
             
 
         }}></div>

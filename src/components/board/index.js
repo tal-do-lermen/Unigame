@@ -1,16 +1,19 @@
 import React from "react";
-import Player from "../player/player";
 import { MapSize } from "../cfg";
 import Debugger from "../Debugger/debugger";
-import useEventListener from '@use-it/event-listener'
+import Player from "../player/player";
 
 const posicaoInicial = { x: 0, y: 9 }
 
 const Board = () => {
     const [playerPosicao,setPlayerPosicao] = React.useState(posicaoInicial);
+    const refElement = React.useRef()
+    
     const mouseClick = (x, y) => {
-        let clickX = Math.abs(Math.trunc(x  /32)-10);
-        let clickY = Math.abs(Math.trunc(y /32));
+
+        let map = refElement.current.getBoundingClientRect();
+        let clickX = Math.trunc((x - map.left)/32) 
+        let clickY = Math.trunc((y - map.top)/32)
         console.log("x", clickX)
         console.log("Y", clickY)
         let posicaoAtualX = playerPosicao.x;
@@ -36,21 +39,24 @@ const Board = () => {
             }
 
 
-        }, 150)
+        }, 100)
        
     }
     
     return (
         <div>
-            {/* <Debugger/> */}
-            <Player position={ playerPosicao } />
-            <div style={{
-                backgroundImage: "url(./assets/mapa.jpg)",
+            
+            <div ref={refElement} style={{
                 width: MapSize,
                 height: MapSize,
+                position:'relative',
+                backgroundImage: "url(./assets/mapa.jpg)",
+                margin: 0
             }}
-                onClick={e => {mouseClick(e.clientX,e.clientY)}}>
+            onClick={e => {mouseClick(e.clientX,e.clientY)}}>
+                    <Debugger/>
 
+            <Player position={ playerPosicao } />
             </div>
         </div>
     );

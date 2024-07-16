@@ -3,60 +3,82 @@ import { MapSize } from "../cfg";
 import Debugger from "../Debugger/debugger";
 import Player from "../player/player";
 
-const posicaoInicial = { x: 0, y: 9 }
+const posicaoInicial = { x: 0, y: 23 }
 
 const Board = () => {
-    const [playerPosicao,setPlayerPosicao] = React.useState(posicaoInicial);
+    const [playerPosicao, setPlayerPosicao] = React.useState(posicaoInicial);
+    const [isLeft, setIsLeft] = React.useState(false);
+    const [direcao, setDirecao] = React.useState(null);
     const refElement = React.useRef()
-    
-    const mouseClick = (x, y) => {
+
+
+    const mouseClick = async (x, y) => {
 
         let map = refElement.current.getBoundingClientRect();
-        let clickX = Math.trunc((x - map.left)/32) 
-        let clickY = Math.trunc((y - map.top)/32)
+        let clickX = Math.trunc((x - map.left) / 32)
+        let clickY = Math.trunc((y - map.top) / 32)
         console.log("x", clickX)
         console.log("Y", clickY)
-        let posicaoAtualX = playerPosicao.x;
-        let posicaoAtualY = playerPosicao.y;
-        setInterval(() => {
+        let posicaoAtualX = Math.trunc((playerPosicao.x));
+        let posicaoAtualY = Math.trunc((playerPosicao.y));
+
+        let animacao = setInterval((e) => {
+            console.log('posicaoAtualY', posicaoAtualY)
+            console.log('clickY', clickY)
+            console.log('posicaoAtualX', posicaoAtualX)
+            console.log('clickX', clickX)
 
             if (posicaoAtualX === clickX) {
-                if(posicaoAtualY === clickY)
-                    return;
 
-                if (clickY < posicaoAtualY)
-                    posicaoAtualY --
-                else
-                    posicaoAtualY ++
+
+
+                if (clickY < posicaoAtualY) {
+                    posicaoAtualY--
+                    setDirecao('C')
+                }
+                else {
+                    posicaoAtualY++
+                    setDirecao('B')
+                }
                 setPlayerPosicao({ x: posicaoAtualX, y: posicaoAtualY })
             } else {
-                
-                if (clickX < posicaoAtualX)
-                    posicaoAtualX --
-                else
-                    posicaoAtualX ++ 
+
+                setDirecao('ED')
+                if (clickX < posicaoAtualX) {
+                    posicaoAtualX--
+                    setIsLeft(true)
+                }
+                else {
+                    posicaoAtualX++
+                    setIsLeft(false)
+                }
                 setPlayerPosicao({ x: posicaoAtualX, y: posicaoAtualY })
             }
+            if (posicaoAtualY === clickY && posicaoAtualX === clickX) {
+                clearInterval(animacao)
+                setDirecao('S')
+            }
+        },
+            200
+            , [setIsLeft, setDirecao, setPlayerPosicao, posicaoAtualY, posicaoAtualX, clickX, clickY])
 
 
-        }, 100)
-       
     }
-    
+
     return (
         <div>
-            
+
             <div ref={refElement} style={{
                 width: MapSize,
                 height: MapSize,
-                position:'relative',
+                position: 'relative',
                 backgroundImage: "url(./assets/mapa.jpg)",
                 margin: 0
             }}
-            onClick={e => {mouseClick(e.clientX,e.clientY)}}>
-                    <Debugger/>
+                onClick={e => { mouseClick(e.clientX, e.clientY) }}>
+                <Debugger />
 
-            <Player position={ playerPosicao } />
+                <Player position={playerPosicao} Direcao={direcao} isLeft={isLeft} />
             </div>
         </div>
     );

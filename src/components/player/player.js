@@ -1,5 +1,5 @@
 import React from "react";
-import { PlayerSize } from "../cfg";
+import { PlayerSize, TileSize } from "../cfg";
 import './player.css';
 const Player = (props) => {
 
@@ -29,8 +29,8 @@ const Player = (props) => {
             animation: 'player-animation 1s infinite steps(6)',
             position: 'absolute',
             zIndex: 1,
-            top: props.position.y * 32,
-            left: props.position.x * 32,
+            top: props.position.y * TileSize,
+            left: props.position.x * TileSize,
             transform: props.isLeft ? 'scaleX(-1)' : 'scaleX(1)'
 
 

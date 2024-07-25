@@ -1,6 +1,6 @@
 import React from "react";
-import { MapSize } from "../cfg";
-import Debugger from "../Debugger/debugger";
+import { MapSize, TileSize } from "../cfg";
+import Debugger from "../Debugger";
 import Player from "../player/player";
 
 const posicaoInicial = { x: 0, y: 23 }
@@ -10,23 +10,19 @@ const Board = () => {
     const [isLeft, setIsLeft] = React.useState(false);
     const [direcao, setDirecao] = React.useState(null);
     const refElement = React.useRef()
-
+    const [map, setMap] = React.useState();
 
     const mouseClick = async (x, y) => {
 
         let map = refElement.current.getBoundingClientRect();
-        let clickX = Math.trunc((x - map.left) / 32)
-        let clickY = Math.trunc((y - map.top) / 32)
+        let clickX = Math.trunc((x - map.left) / TileSize)
+        let clickY = Math.trunc((y - map.top) / TileSize)
         console.log("x", clickX)
         console.log("Y", clickY)
         let posicaoAtualX = Math.trunc((playerPosicao.x));
         let posicaoAtualY = Math.trunc((playerPosicao.y));
 
         let animacao = setInterval((e) => {
-            console.log('posicaoAtualY', posicaoAtualY)
-            console.log('clickY', clickY)
-            console.log('posicaoAtualX', posicaoAtualX)
-            console.log('clickX', clickX)
 
             if (posicaoAtualX === clickX) {
 
@@ -58,6 +54,19 @@ const Board = () => {
                 clearInterval(animacao)
                 setDirecao('S')
             }
+            console.log(posicaoAtualX, posicaoAtualY)
+            //ToDo fazer dinamicamente com retorno banco. Array?
+            if ((posicaoAtualX > 12 && posicaoAtualX < 17) && (posicaoAtualY > 38 && posicaoAtualX < 44)) {
+                return setMap(<div style={{
+                    backgroundImage: "url(./assets/lgpd.png)",
+                    width: MapSize,
+                    height: MapSize / 2,
+                    backgroundPositionY: 512
+                }}
+                    className="map"
+                ></div>)
+            } else setMap()
+
         },
             200
             , [setIsLeft, setDirecao, setPlayerPosicao, posicaoAtualY, posicaoAtualX, clickX, clickY])
@@ -76,8 +85,8 @@ const Board = () => {
                 margin: 0
             }}
                 onClick={e => { mouseClick(e.clientX, e.clientY) }}>
+                {map}
                 <Debugger />
-
                 <Player position={playerPosicao} Direcao={direcao} isLeft={isLeft} />
             </div>
         </div>

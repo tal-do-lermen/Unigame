@@ -1,14 +1,15 @@
 import React from "react";
+import { TileSize } from "../cfg";
 
 const Tile = (props) => {
 
     return (
         <div style={{
             position: 'absolute',
-            left: 32 * props.position.x,
-            bottom: 32 * props.position.y,
-            height: 32,
-            width: 32,
+            left: TileSize * props.position.x,
+            bottom: TileSize * props.position.y,
+            height: TileSize,
+            width: TileSize,
             border: '2px solid red'
         }}>
         </div>

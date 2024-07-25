@@ -1,5 +1,5 @@
 import React from "react";
-import { MapSize } from "../cfg";
+import { MapSize, TileSize } from "../cfg";
 import Tile from "../tile";
 
 function getCanvasMap() {
@@ -7,7 +7,7 @@ function getCanvasMap() {
     let canvasY = [];
     let canvasX = [];
 
-    for (let i = 0; i < MapSize / 16; i++) {
+    for (let i = 0; i < MapSize / TileSize; i++) {
         canvasX.push(0)
         canvasY.push(0)
     }

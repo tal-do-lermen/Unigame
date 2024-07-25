@@ -1,0 +1,128 @@
+{
+    "extends": [
+        "react-app",
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:react-hooks/recommended",
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "plugin:import/typescript",
+        // "plugin:@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "env": {
+        "browser": true,
+        "node": true,
+        "es6": true
+    },
+    "rules": {
+        // "no-console":"warn",
+        "arrow-spacing": "warn",
+        "object-curly-spacing": ["warn", "always"],
+        "no-bitwise": 1,
+        "no-else-return": 2,
+        "no-empty": ["warn", {
+            "allowEmptyCatch": true
+        }],
+        "no-eq-null": 2,
+        "no-extra-parens": 0,
+        "no-floating-decimal": 2,
+        "no-inner-declarations": [2, "both"],
+        "no-lonely-if": 2,
+        "no-multiple-empty-lines": [2, {
+            "max": 3
+        }],
+        "no-multi-spaces": "warn",
+        "no-self-compare": 2,
+        "no-underscore-dangle": 0,
+        "no-unused-expressions": 1,
+        "no-unused-vars": 1,
+        "no-void": 0,
+        "brace-style": [1, "1tbs"],
+        "camelcase": [1, {
+            "properties": "never"
+        }],
+        "consistent-return": 0,
+        "comma-spacing": ["warn", {
+            "before": false,
+            "after": true
+        }],
+        "comma-style": [1, "last"],
+        // "complexity": [1, 20],
+        "func-names": 0,
+        "guard-for-in": 2,
+        "indent": "off",
+        "@typescript-eslint/indent": [1, 2, {
+            "SwitchCase": 1,
+            "VariableDeclarator": 2
+        }],
+        "jsx-quotes": ["warn", "prefer-single"],
+        "key-spacing": ["warn", {
+            "afterColon": true,
+            "beforeColon": false
+        }],
+        "max-len": [0, 120, 4],
+        "new-cap": [1, {
+            "newIsCap": true,
+            "capIsNew": false
+        }],
+        "quotes": [1, "single", "avoid-escape"],
+        "keyword-spacing": [1, {
+            "before": true,
+            "after": true
+        }],
+        "space-before-blocks": [1, "always"],
+        "array-bracket-spacing": [1, "never"],
+        "space-infix-ops": "warn",
+        "space-in-parens": [1, "never"],
+        "strict": [0],
+        "operator-linebreak": ["warn", "before", {
+            "overrides": {
+                "?": "ignore",
+                ":": "ignore",
+                "||": "ignore",
+                "&&": "ignore"
+            }
+        }],
+        "valid-jsdoc": 1,
+        "wrap-iife": [1, "any"],
+        "yoda": [1, "never"],
+        "semi": "warn",
+        "no-use-before-define": 0,
+        "import/namespace": [2, {
+            "allowComputed": true
+        }],
+        "import/order": ["warn", {
+            "groups": ["index", "sibling", "parent", "internal", "external", "builtin", "object"],
+            "alphabetize": {
+                "order": "asc",
+                "caseInsensitive": true
+            },
+            "newlines-between": "never",
+        }],
+        //*Desativados por serem muitos arquivos... 
+        //TODO Reativar e corrigir quando der
+        "@typescript-eslint/no-use-before-define": [0, {
+            "functions": false
+        }],
+        "react/prop-types": 0,
+        "react/display-name": 0,
+        "react/no-unescaped-entities": 0,
+        "react/jsx-key": 0,
+        "react/no-string-refs": 0,
+        // "@typescript-eslint/no-var-requires": 0,
+        // "@typescript-eslint/no-empty-function": 0
+    },
+    "plugins": [
+        "react",
+        "@typescript-eslint/eslint-plugin",
+        "eslint-plugin-flowtype",
+        "eslint-plugin-import",
+        "eslint-plugin-jsx-a11y",
+        "eslint-plugin-react",
+        "eslint-plugin-react-hooks"
+    ],
+    "globals": {
+
+    }
+}

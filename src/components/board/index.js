@@ -1,5 +1,6 @@
 import React from "react";
 import { MapSize, TileSize } from "../cfg";
+import QuizMaps from "../maps";
 import Player from "../player/player";
 
 const posicaoInicial = { x: 0, y: 46 }
@@ -22,21 +23,21 @@ const Board = () => {
         let animacao = undefined
         let posicaoFinalX;
         let posicaoFinalY;
-        
-            clearInterval(animacaoAndamento)
-        
-            animacao = setInterval((e) => {
 
-                console.log(animacao)
+        clearInterval(animacaoAndamento)
+
+        animacao = setInterval((e) => {
+
+            console.log(animacao)
             if (posicaoAtualX === clickX) {
 
 
                 if (clickY < posicaoAtualY) {
-                    posicaoAtualY-= 0.5
+                    posicaoAtualY -= 0.5
                     setDirecao('C')
                 }
                 else {
-                    posicaoAtualY+= 0.5
+                    posicaoAtualY += 0.5
                     setDirecao('B')
                 }
                 setPlayerPosicao({ x: posicaoAtualX, y: posicaoAtualY })
@@ -44,11 +45,11 @@ const Board = () => {
 
                 setDirecao('ED')
                 if (clickX < posicaoAtualX) {
-                    posicaoAtualX-= 0.5
+                    posicaoAtualX -= 0.5
                     setIsLeft(true)
                 }
                 else {
-                    posicaoAtualX+= 0.5
+                    posicaoAtualX += 0.5
                     setIsLeft(false)
                 }
                 setPlayerPosicao({ x: posicaoAtualX, y: posicaoAtualY })
@@ -57,45 +58,38 @@ const Board = () => {
                 clearInterval(animacao)
                 setDirecao('S')
                 posicaoFinalX = posicaoAtualX
-                posicaoFinalY =posicaoAtualY
-                
+                posicaoFinalY = posicaoAtualY
+
             }
             //ToDo fazer dinamicamente com retorno banco. Array?
             if ((posicaoFinalX > 12 && posicaoFinalX < 17) && (posicaoFinalY > 35 && posicaoFinalY < 45)) {
-                return setMap(<div style={{
-                    backgroundImage: "url(./assets/lgpd.png)",
-                    width: MapSize,
-                    height: MapSize / 2,
-                    backgroundPositionY: 512
-                }}
-                    className="map"
-                ></div>)
+                return setMap(<QuizMaps></QuizMaps>)
             } else setMap()
 
         },
             90
             , [setIsLeft, setDirecao, setPlayerPosicao, posicaoAtualY, posicaoAtualX, clickX, clickY])
-      
-      setAnimacaoAndamento(animacao)
-      
+
+        setAnimacaoAndamento(animacao)
+
 
     }
 
     return (
         <div>
-           
             <div ref={refElement} style={{
                 width: MapSize,
                 height: MapSize,
                 position: 'relative',
                 backgroundImage: "url(./assets/mapa.jpg)",
+                filter: map ? "blur(5px)" : '',
                 margin: 0
             }}
                 onClick={e => { mouseClick(e.clientX, e.clientY) }}>
-                {map}
-                {/* <Debugger></Debugger> */}
+                {/* <Debugger></Debugger>  */}
                 <Player position={playerPosicao} Direcao={direcao} isLeft={isLeft} />
             </div>
+            {map}
         </div>
     );
 }
